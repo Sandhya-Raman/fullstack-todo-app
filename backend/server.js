@@ -1,3 +1,4 @@
+
 const express = require("express");
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
@@ -11,9 +12,13 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+// Serve uploaded images
+app.use("/uploads", express.static("uploads"));
+
 // Import routes
 const authRoutes = require("./routes/auth");
 const taskRoutes = require("./routes/tasks");
+const uploadRoutes = require("./routes/upload");
 
 // Welcome route
 app.get("/", (req, res) => {
@@ -23,6 +28,7 @@ app.get("/", (req, res) => {
 // API routes
 app.use("/api/auth", authRoutes);
 app.use("/api/tasks", taskRoutes);
+app.use("/api/upload", uploadRoutes);
 
 // MongoDB connection
 mongoose.connect(process.env.MONGODB_URI)

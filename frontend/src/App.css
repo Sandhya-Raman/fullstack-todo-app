@@ -219,6 +219,83 @@ h1 {
   font-size: 14px;
 }
 
+/* Image Upload Section */
+.image-upload-section {
+  margin: 25px 0;
+  padding: 22px;
+  background: #f5f7fa;
+  border: 1px solid #dce3ea;
+  border-radius: 10px;
+}
+
+.image-upload-section h2 {
+  margin: 0 0 10px;
+  color: #263238;
+  text-align: center;
+}
+
+.image-upload-section p {
+  color: #607d8b;
+  text-align: center;
+}
+
+.image-upload-section form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.image-upload-section input[type="file"] {
+  width: 100%;
+  padding: 12px;
+  background: white;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+.image-upload-section button {
+  padding: 12px;
+  background: #1976d2;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 15px;
+}
+
+.image-upload-section button:hover {
+  background: #125ca5;
+}
+
+.image-upload-section button:disabled {
+  background: #90a4ae;
+  cursor: not-allowed;
+}
+
+.image-preview,
+.uploaded-image {
+  margin-top: 15px;
+  text-align: center;
+}
+
+.image-preview h3,
+.uploaded-image h3 {
+  color: #263238;
+}
+
+.image-preview img,
+.uploaded-image img {
+  display: block;
+  width: 100%;
+  max-width: 350px;
+  max-height: 350px;
+  object-fit: contain;
+  margin: 12px auto;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  background: white;
+}
+
 @media (max-width: 480px) {
   .todo-container {
     padding: 22px;

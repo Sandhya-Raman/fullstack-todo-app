@@ -18,6 +18,15 @@ function App() {
   const [taskDescription, setTaskDescription] = useState("");
   const [editingTask, setEditingTask] = useState(null);
 
+  // Image upload states
+  const [selectedImage, setSelectedImage] = useState(null);
+  const [previewImage, setPreviewImage] = useState("");
+  const [uploadedImage, setUploadedImage] = useState("");
+  const [uploading, setUploading] = useState(false);
+
+  // Backend image URL
+  const IMAGE_BASE_URL = API.defaults.baseURL.replace(/\/api\/?$/, "");
+
   // Fetch tasks from backend
   const fetchTasks = async () => {
     try {
@@ -147,6 +156,68 @@ function App() {
     }
   };
 
+  // Select image and create preview
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+
+    if (!file) return;
+
+    if (!file.type.startsWith("image/")) {
+      setMessage("Please select a valid image file.");
+      e.target.value = "";
+      return;
+    }
+
+    if (file.size > 5 * 1024 * 1024) {
+      setMessage("Image size must be less than 5 MB.");
+      e.target.value = "";
+      return;
+    }
+
+    setSelectedImage(file);
+    setPreviewImage(URL.createObjectURL(file));
+    setMessage("");
+  };
+
+  // Upload image to backend
+  const handleImageUpload = async (e) => {
+    e.preventDefault();
+
+    if (!selectedImage) {
+      setMessage("Please select an image first.");
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append("image", selectedImage);
+
+    try {
+      setUploading(true);
+      setMessage("");
+
+      const response = await API.post("/upload", formData, {
+        headers: {
+          "Content-Type": undefined,
+        },
+      });
+
+      setUploadedImage(
+        `${IMAGE_BASE_URL}${response.data.image.path}`
+      );
+
+      setSelectedImage(null);
+      setPreviewImage("");
+
+      setMessage("Image uploaded successfully!");
+    } catch (error) {
+      setMessage(
+        error.response?.data?.message || "Image upload failed."
+      );
+    } finally {
+      setUploading(false);
+    }
+  };
+
   // Logout
   const handleLogout = () => {
     localStorage.removeItem("token");
@@ -159,6 +230,9 @@ function App() {
     setEditingTask(null);
     setEmail("");
     setPassword("");
+    setSelectedImage(null);
+    setPreviewImage("");
+    setUploadedImage("");
     setMessage("You have logged out successfully.");
   };
 
@@ -242,6 +316,42 @@ function App() {
           <button className="logout-button" onClick={handleLogout}>
             Logout
           </button>
+        </div>
+
+        {/* Image Upload Section */}
+        <div className="image-upload-section">
+          <h2>Image Upload Feature</h2>
+
+          <p>Select an image to preview and upload.</p>
+
+          <form onSubmit={handleImageUpload}>
+            <input
+              type="file"
+              accept="image/*"
+              onChange={handleImageChange}
+            />
+
+            {previewImage && (
+              <div className="image-preview">
+                <h3>Image Preview</h3>
+                <img src={previewImage} alt="Selected preview" />
+              </div>
+            )}
+
+            <button
+              type="submit"
+              disabled={!selectedImage || uploading}
+            >
+              {uploading ? "Uploading..." : "Upload Image"}
+            </button>
+          </form>
+
+          {uploadedImage && (
+            <div className="uploaded-image">
+              <h3>Uploaded Image</h3>
+              <img src={uploadedImage} alt="Uploaded" />
+            </div>
+          )}
         </div>
 
         <form onSubmit={handleTaskSubmit} className="task-form">
