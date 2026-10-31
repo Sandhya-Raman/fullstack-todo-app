@@ -1,141 +1,95 @@
 # Full Stack To-Do Application
 
-A full-stack To-Do application that allows users to register, log in, and manage their personal tasks securely.
+This is a Full Stack To-Do Application developed using the MERN stack as part of my Full Stack Web Development Internship.
 
-## Features
-
-- User registration and login
-- JWT-based authentication
-- Secure password hashing using bcrypt
-- Add new tasks
-- View personal tasks
-- Edit existing tasks
-- Mark tasks as completed
-- Delete tasks
-- MongoDB database integration
-- User-specific task management
+The application allows users to register, log in, manage their tasks and upload images.
 
 ## Technologies Used
 
-**Frontend**
+**Frontend:**
 - React.js
-- Vite
-- Axios
+- HTML
 - CSS
+- JavaScript
+- Axios
 
-**Backend**
+**Backend:**
 - Node.js
 - Express.js
 - MongoDB
 - Mongoose
-- JSON Web Tokens (JWT)
-- bcryptjs
+- JWT
+- Multer
+
+## Features
+
+### Assignment 1 – Full Stack To-Do Application
+
+- User registration and login.
+- Add new tasks.
+- View all tasks.
+- Edit tasks.
+- Delete tasks.
+- Mark tasks as completed.
+- User authentication using JWT.
+
+### Assignment 2 – Image Upload Feature
+
+- Upload images using Multer.
+- Select images from the device.
+- Preview images before uploading.
+- Display uploaded images in the React application.
+- Maximum image size: 5 MB.
 
 ## Project Structure
 
 ```text
 fullstack-todo-app/
+│
 ├── backend/
+│   ├── middleware/
 │   ├── models/
 │   ├── routes/
-│   ├── middleware/
-│   ├── server.js
-│   └── package.json
+│   ├── uploads/
+│   └── server.js
 │
 ├── frontend/
 │   ├── src/
-│   │   ├── services/
-│   │   ├── App.jsx
-│   │   ├── App.css
-│   │   ├── index.css
-│   │   └── main.jsx
-│   └── package.json
+│   └── index.html
 │
 └── README.md
 ```
 
-## Installation and Setup
+## How to Run the Project
 
-### 1. Clone the Repository
-
-```bash
-git clone YOUR_GITHUB_REPOSITORY_URL
-cd fullstack-todo-app
-```
-
-### 2. Backend Setup
+### Backend
 
 ```bash
 cd backend
 npm install
-```
-
-Create a `.env` file inside the backend folder:
-
-```env
-PORT=5000
-MONGODB_URI=your_mongodb_connection_string
-JWT_SECRET=your_secret_key
-```
-
-Start the backend:
-
-```bash
 npm run dev
 ```
 
-The backend runs at `http://localhost:5000`.
-
-### 3. Frontend Setup
+### Frontend
 
 Open another terminal:
 
 ```bash
 cd frontend
 npm install
-```
-
-Create a `.env` file inside the frontend folder:
-
-```env
-VITE_API_URL=http://localhost:5000/api
-```
-
-Start the frontend:
-
-```bash
 npm run dev
 ```
 
-Open the local URL displayed in the terminal.
+Open the local URL shown in the terminal to use the application.
 
-## API Endpoints
+## GitHub Repository
 
-### Authentication
-
-| Method | Endpoint | Description |
-|---|---|---|
-| POST | `/api/auth/register` | Register a new user |
-| POST | `/api/auth/login` | Log in a user |
-
-### Tasks
-
-All task endpoints require a valid JWT Bearer token.
-
-| Method | Endpoint | Description |
-|---|---|---|
-| POST | `/api/tasks` | Create a task |
-| GET | `/api/tasks` | Get the logged-in user's tasks |
-| PUT | `/api/tasks/:id` | Update a task |
-| DELETE | `/api/tasks/:id` | Delete a task |
-
-## Security
-
-- Passwords are hashed using bcryptjs.
-- JWT tokens are used to authenticate users.
-- Task routes are protected by authentication middleware.
-- Users can access and manage only their own tasks.
+[Full Stack To-Do Application](https://github.com/Sandhya-Raman/fullstack-todo-app)
 
 ## Author
 
-Sandhya R
+**Sandhya R**
+
+GitHub: [Sandhya-Raman](https://github.com/Sandhya-Raman)
+
+---
